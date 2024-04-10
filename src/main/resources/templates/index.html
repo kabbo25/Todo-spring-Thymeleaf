@@ -24,7 +24,7 @@
 
 <div class="container container-style">
     <br>
-    <div class="row">
+    <div class="row bg-transparent">
         <div class="col col-style">
             <!-- Include navbar.html -->
             <div th:replace="navbar.html"></div>
@@ -33,6 +33,13 @@
 
             <!-- Include modal.html -->
             <div th:replace="modal.html"></div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col my-col-style">
+          <div th:replace="table.html"></div>
         </div>
     </div>
 </div>

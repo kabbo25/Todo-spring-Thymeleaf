@@ -1,0 +1,35 @@
+<table class="table table-style">
+    <thead>
+    <tr>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td>
+            <img th:if="${task.status}" data-toggle="tooltip" data-placement="top"
+                 title="Done!" src="img/task-done-pro-sm.png"/>
+            <img th:unless="${task.status}" data-toggle="tooltip" data-placement="top"
+                 title="Not done!" src="img/task-notdone-pro-sm.png"/>
+        </td>
+        <td th:text="${task.description}"></td>
+        <td>
+            <a th:unless="${task.status}" th:href="@{/showUpdateTeskPage(taskId=${task.id})}">
+                <img data-toggle="tooltip" data-placement="top" title="Change" src="img/update-pro-sm.png"/>
+            </a>
+
+            <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}">
+                <img data-toggle="tooltip" data-placement="top"
+                     title="Mark as done" src="img/done-pro-sm.png"/>
+            </a>
+
+            <a th:if="${task.status}" th:href="@{/setStateToNotDoneAction(taskId=${task.id})}">
+                <img data-toggle="tooltip" data-placement="top" title="Restore"
+                     src="img/restore-task-pro-sm.png"/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>

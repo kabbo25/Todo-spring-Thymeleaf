@@ -34,4 +34,20 @@ public class TaskController {
         taskRepository.deleteById(taskId);
         return "redirect:/";
     }
+    @GetMapping("/setStateToDoneAction") // Add this annotation
+    public String setStateToDone(@RequestParam Long taskId) {
+        Task task = taskRepository.findById(taskId).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));
+        task.setStatus(true);
+        taskRepository.save(task);
+        return "redirect:/";
+    }
+    @GetMapping("/setStateToNotDoneAction") // Add this annotation
+    public String setStateToNotDone(@RequestParam Long taskId) {
+        // Logic to set task status to done
+        // For example:
+        Task task = taskRepository.findById(taskId).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));
+        task.setStatus(false);
+        taskRepository.save(task);
+        return "redirect:/";
+    }
 }
