@@ -1,4 +1,4 @@
-<table class="table table-style">
+<table class="table table-borderless bg-transparent ">
     <thead>
     <tr>
         <th>Status</th>
@@ -19,7 +19,6 @@
             <a th:unless="${task.status}" th:href="@{/showUpdateTeskPage(taskId=${task.id})}">
                 <img data-toggle="tooltip" data-placement="top" title="Change" src="img/update-pro-sm.png"/>
             </a>
-
             <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}">
                 <img data-toggle="tooltip" data-placement="top"
                      title="Mark as done" src="img/done-pro-sm.png"/>

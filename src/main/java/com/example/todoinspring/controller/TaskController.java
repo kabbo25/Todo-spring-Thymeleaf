@@ -50,4 +50,24 @@ public class TaskController {
         taskRepository.save(task);
         return "redirect:/";
     }
+    @GetMapping("/showDoneTasks")
+    public String showDoneTasks(Model model) {
+        List<Task> tasks = taskRepository.findByStatus(true);
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("newTodo", new Task());
+        return "index";
+    }
+    @GetMapping("/showNotDoneTasks")
+    public String showNotDoneTasks(Model model) {
+        List<Task> tasks = taskRepository.findByStatus(false);
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("newTodo", new Task());
+        return "index";
+    }
+    @GetMapping("removeDoneTasks")
+    public String removeDoneTasks() {
+        List<Task> tasks = taskRepository.findByStatus(true);
+        taskRepository.deleteAll(tasks);
+        return "redirect:/";
+    }
 }
