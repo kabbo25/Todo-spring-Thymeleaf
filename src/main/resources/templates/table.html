@@ -1,7 +1,8 @@
-<table class="table table-borderless bg-transparent ">
+<table class="table table-borderless table-striped ">
     <thead>
     <tr>
         <th>Status</th>
+        <th>Title</th>
         <th>Description</th>
         <th>Action</th>
     </tr>
@@ -14,6 +15,7 @@
             <img th:unless="${task.status}" data-toggle="tooltip" data-placement="top"
                  title="Not done!" src="img/task-notdone-pro-sm.png"/>
         </td>
+        <td th:text="${task.name}"></td>
         <td th:text="${task.description}"></td>
         <td>
             <a th:unless="${task.status}" th:href="@{/showUpdateTeskPage(taskId=${task.id})}">
