@@ -1,4 +1,4 @@
-<table class="table table-borderless table-striped ">
+<table class="table table-bordered table-striped ">
     <thead>
     <tr>
         <th>Status</th>
@@ -18,8 +18,11 @@
         <td th:text="${task.name}"></td>
         <td th:text="${task.description}"></td>
         <td>
-            <a th:unless="${task.status}" th:href="@{/showUpdateTeskPage(taskId=${task.id})}">
-                <img data-toggle="tooltip" data-placement="top" title="Change" src="img/update-pro-sm.png"/>
+            <a th:unless="${task.status}" th:if="${task.id != null}" th:href="@{/showUpdateTaskPage(taskId=${task.id})}" data-bs-target="#exampleModal" data-bs-toggle="modal">
+                <img class="update-button" data-toggle="tooltip" data-placement="top" title="Change" src="img/update-pro-sm.png"/>
+            </a>
+            <a th:unless="${task.status}" th:href="@{/deleteTask(taskId=${task.id})}">
+                <img style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top" title="Delete" src="img/bin-md.png"/>
             </a>
             <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}">
                 <img data-toggle="tooltip" data-placement="top"
@@ -34,3 +37,26 @@
     </tr>
     </tbody>
 </table>
+
+<script>
+    let updateButtons = document.querySelectorAll(".update-button");
+    updateButtons.forEach(function(button) {
+        button.addEventListener("click", function () {
+            let title = document.getElementById("title");
+            let description = document.getElementById("description");
+            let status = document.getElementById("status");
+            let form = document.getElementById("replaceIt");
+            //get data from the row of the table
+            let row = button.parentElement.parentElement.parentElement;
+            console.log(row);
+            title.value = row.cells[1].innerText;
+            description.value = row.cells[2].innerText;
+            status.value = 'false';
+            let mymodal = document.getElementById("exampleModal");
+            let modalTitle = document.getElementById("exampleModalLabel");
+            modalTitle.innerText = "Update";
+            document.getElementById('replaceIt').setAttribute('action', 'showUpdateTaskPage');
+
+        });
+    });
+</script>
