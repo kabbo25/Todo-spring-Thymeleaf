@@ -57,6 +57,7 @@ public class TaskServiceImpl implements TaskService {
         Task taskToEdit = taskRepository.findById(taskId).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));
         taskToEdit.setName(updatedTask.getName());
         taskToEdit.setDescription(updatedTask.getDescription());
+        taskToEdit.setStatus(updatedTask.isStatus());
         taskRepository.save(taskToEdit);
     }
 }
