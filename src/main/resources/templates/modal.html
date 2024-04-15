@@ -11,7 +11,7 @@
                     <p th:text="${newTodo.getName()}"></p>
                     <div class="form-group mb-3">
                         <label for="title">Note Title</label>
-                        <input class="form-control" id="title" name="name" placeholder="Note Title" th:field="*{name}" type="text"/>
+                        <input class="form-control" id="title" name="name" placeholder="Note Title" th:field="*{name}" type="text" required/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="description">Description</label>
