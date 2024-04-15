@@ -6,6 +6,7 @@ import com.example.todoinspring.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -27,6 +28,18 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> findAll() {
         return taskRepository.findAll();
     }
+
+    @Override
+    public List<Task> sortByTitle(String order) {
+        List<Task> tasks = taskRepository.findAll();
+        if (order.equals("desc")) {
+            tasks.sort(Comparator.comparing(Task::getName).reversed());
+            return tasks;
+        }
+        tasks.sort(Comparator.comparing(Task::getName));
+        return tasks;
+    }
+
     @Override
     public void setStateToDone(Long taskId) {
         Task task = taskRepository.findById(taskId).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));

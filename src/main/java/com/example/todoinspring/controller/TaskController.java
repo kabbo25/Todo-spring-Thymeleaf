@@ -74,4 +74,12 @@ public class TaskController {
         taskService.editTask(taskId, task);
         return "redirect:/";
     }
+    @GetMapping("/sortTasksByTitle")
+    public String sortByTitle(@RequestParam  String order , Model model) {
+        List<Task> tasks = taskService.sortByTitle(order);
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("sortOrder", order);
+        model.addAttribute("newTodo", new Task());
+        return "index";
+    }
 }

@@ -13,4 +13,5 @@ public interface TaskService {
     void removeDoneTasks();
     void editTask(Long taskId, Task updatedTask);
     List<Task> findAll();
+    List<Task> sortByTitle(String order);
 }
