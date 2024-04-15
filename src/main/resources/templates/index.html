@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html lang="" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>ToDoApp Home Page</title>
@@ -16,9 +16,14 @@
         .container-style {
             background-color: lightyellow;
         }
-        .table{
+
+        .table {
             --bs-table-bg: lightyellow;
             border: 2px solid #25ae87;
+        }
+
+        .todo-title {
+            color: #074173;
         }
     </style>
 </head>
@@ -42,7 +47,7 @@
     <br>
     <div class="row">
         <div class="col my-col-style">
-          <div th:replace="table.html"></div>
+            <div th:replace="table.html"></div>
         </div>
     </div>
 </div>

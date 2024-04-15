@@ -22,7 +22,7 @@
             <a th:unless="${task.status}" th:href="@{/deleteTask(taskId=${task.id})}">
                 <img style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top" title="Delete" src="img/bin-md.png"/>
             </a>
-            <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}" onclick="setStateToDone(${task.id})">
+            <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}">
                 <img data-toggle="tooltip" data-placement="top" title="Mark as done" src="img/done-pro-sm.png"/>
             </a>
             <a th:if="${task.status}" th:href="@{/setStateToNotDoneAction(taskId=${task.id})}">
@@ -40,13 +40,8 @@
             let title = document.getElementById("title");
             let description = document.getElementById("description");
             let status = document.getElementById("status");
-            let form = document.getElementById("replaceIt");
-
-            // Get data from the row of the table
             let row = button.parentElement.parentElement.parentElement;
             let taskId = row.getAttribute('data-id');
-            console.log(row);
-            console.log(taskId);
             title.value = row.cells[1].innerText;
             description.value = row.cells[2].innerText;
             status.value = 'false';
