@@ -77,10 +77,9 @@ public class TaskController {
         return "redirect:/";
     }
     @PostMapping("/showUpdateTaskPage")
-    public String editTask(@ModelAttribute Task task) {
-        System.out.println("hellow");
-        System.out.println(task);
-        Task taskToEdit = taskRepository.findById(task.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));
+    public String editTask(@ModelAttribute Task task,@RequestParam Long taskId) {
+        System.out.println(taskId);
+        Task taskToEdit = taskRepository.findById(taskId).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));
         taskToEdit.setName(task.getName());
         taskToEdit.setDescription(task.getDescription());
         taskRepository.save(taskToEdit);

@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped ">
+<table class="table table-bordered table-striped">
     <thead>
     <tr>
         <th>Status</th>
@@ -8,12 +8,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="task : ${tasks}">
-        <td>
-            <img th:if="${task.status}" data-toggle="tooltip" data-placement="top"
-                 title="Done!" src="img/task-done-pro-sm.png"/>
-            <img th:unless="${task.status}" data-toggle="tooltip" data-placement="top"
-                 title="Not done!" src="img/task-notdone-pro-sm.png"/>
+    <tr th:each="task : ${tasks}" th:attr="data-id=${task.id}">
+    <td>
+            <img th:if="${task.status}" data-toggle="tooltip" data-placement="top" title="Done!" src="img/task-done-pro-sm.png"/>
+            <img th:unless="${task.status}" data-toggle="tooltip" data-placement="top" title="Not done!" src="img/task-notdone-pro-sm.png"/>
         </td>
         <td th:text="${task.name}"></td>
         <td th:text="${task.description}"></td>
@@ -24,39 +22,40 @@
             <a th:unless="${task.status}" th:href="@{/deleteTask(taskId=${task.id})}">
                 <img style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top" title="Delete" src="img/bin-md.png"/>
             </a>
-            <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}">
-                <img data-toggle="tooltip" data-placement="top"
-                     title="Mark as done" src="img/done-pro-sm.png"/>
+            <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}" onclick="setStateToDone(${task.id})">
+                <img data-toggle="tooltip" data-placement="top" title="Mark as done" src="img/done-pro-sm.png"/>
             </a>
-
             <a th:if="${task.status}" th:href="@{/setStateToNotDoneAction(taskId=${task.id})}">
-                <img data-toggle="tooltip" data-placement="top" title="Restore"
-                     src="img/restore-task-pro-sm.png"/>
+                <img data-toggle="tooltip" data-placement="top" title="Restore" src="img/restore-task-pro-sm.png"/>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
 
-<script>
-    let updateButtons = document.querySelectorAll(".update-button");
-    updateButtons.forEach(function(button) {
+    <script>
+        let updateButtons = document.querySelectorAll(".update-button");
+        updateButtons.forEach(function(button) {
         button.addEventListener("click", function () {
             let title = document.getElementById("title");
             let description = document.getElementById("description");
             let status = document.getElementById("status");
             let form = document.getElementById("replaceIt");
-            //get data from the row of the table
+
+            // Get data from the row of the table
             let row = button.parentElement.parentElement.parentElement;
+            let taskId = row.getAttribute('data-id');
             console.log(row);
+            console.log(taskId);
             title.value = row.cells[1].innerText;
             description.value = row.cells[2].innerText;
             status.value = 'false';
-            let mymodal = document.getElementById("exampleModal");
             let modalTitle = document.getElementById("exampleModalLabel");
             modalTitle.innerText = "Update";
-            document.getElementById('replaceIt').setAttribute('action', 'showUpdateTaskPage');
-
+            document.getElementById('replaceIt').setAttribute('action', '/showUpdateTaskPage?taskId=' + taskId); // Set the action with taskId
         });
     });
+
+
 </script>
+
