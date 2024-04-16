@@ -6,7 +6,7 @@
             <!--<a th:href="@{/sortTasksByTitle(order='asc')}"><i class="fa fa-arrow-up-z-a"></i></a>
             <a th:href="@{/sortTasksByTitle(order='desc')}"><i class="fa fa-arrow-down"></i></a>-->
             <a th:href="${sortOrder == 'desc' ? '/sortTasksByTitle?order=asc' : '/sortTasksByTitle?order=desc'}">
-                <i th:class="${sortOrder == 'desc' ? 'fa fa-arrow-up-z-a' : 'fa fa-arrow-down-a-z'}"></i>
+                <i th:class="${sortOrder == 'desc' ? 'fa sort-icon  fa-arrow-up-z-a' : 'fa sort-icon fa-arrow-down-a-z'}" data-bs-toggle="tooltip" data-bs-placement="top" title="sort-by-title"></i>
             </a>
 
         </th>
