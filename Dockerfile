@@ -4,8 +4,8 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:17.0.1-jdk-slim
 
-COPY --from=build /target/todo-in-spring-0.0.1-SNAPSHOT.jar todo-in-spring.jar
+COPY --from=build /target/todo-in-spring-0.0.1-SNAPSHOT.war todo-in-spring.war
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "todo-in-spring.jar"]
+ENTRYPOINT ["java", "-war", "todo-in-spring.war"]
