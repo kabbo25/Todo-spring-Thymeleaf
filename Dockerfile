@@ -8,4 +8,4 @@ COPY --from=build /target/todo-in-spring-0.0.1-SNAPSHOT.war /usr/local/tomcat/we
 
 EXPOSE 8080
 
-ENTRYPOINT ["catalina.bat", "run"]
+CMD ["java", "-jar", "/usr/local/tomcat/webapps/todo-in-spring.war"]
