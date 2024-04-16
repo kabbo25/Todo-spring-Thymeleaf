@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form id="replaceIt" method="post" th:action="@{/createNewTodo}" th:fragment="content" th:object="${newTodo}">
+                    <p th:text="${newTodo.getName()}"></p>
+                    <div class="form-group mb-3">
+                        <label for="title">Note Title</label>
+                        <input class="form-control" id="title" name="name" placeholder="Note Title" th:field="*{name}" type="text" required/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" th:field="*{description}"></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="status">Status</label>
+                        <select class="form-select" id="status" name="status" th:field="*{status}">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                    <div class="button-container">
+                        <button class="btn btn-primary submit-btn" type="submit" id = "submit-button-id">Submit</button>
+                        <button class="btn btn-secondary clear-btn" type="button" onclick="clearForm()">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

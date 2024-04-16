@@ -1,0 +1,32 @@
+<nav class="home-nav navbar navbar-expand-lg">
+    <a class="navbar-brand home-menu-logo-style">
+        <h1 class="logo-style todo-title">ToDoApp</h1>
+    </a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-bs-target="#exampleModal" data-bs-toggle="modal"><img data-placement="top" data-toggle="tooltip"
+                                                                                                    src="/img/add-md.png" title="Add New Task"/></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/}"><img data-placement="top" data-toggle="tooltip"
+                                                    src="/img/all-md.png" title="Show All"/></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/showDoneTasks}"><img data-placement="top" data-toggle="tooltip"
+                                                                 src="/img/done-task-md.png"
+                                                                 title="Show All Completed Task"/></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/showNotDoneTasks}"><img data-placement="top"
+                                                                    data-toggle="tooltip"
+                                                                    src="/img/notdone-task-md.png"
+                                                                    title="Show All Uncompleted Task"/></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/removeDoneTasks}"><img data-placement="top"
+                                                                   data-toggle="tooltip"
+                                                                   src="/img/bin-md.png"
+                                                                   title="Delete Completed Task"/></a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,63 @@
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Status</th>
+        <th>Title
+            <!--<a th:href="@{/sortTasksByTitle(order='asc')}"><i class="fa fa-arrow-up-z-a"></i></a>
+            <a th:href="@{/sortTasksByTitle(order='desc')}"><i class="fa fa-arrow-down"></i></a>-->
+            <a th:href="${sortOrder == 'desc' ? '/sortTasksByTitle?order=asc' : '/sortTasksByTitle?order=desc'}">
+                <i th:class="${sortOrder == 'desc' ? 'fa sort-icon  fa-arrow-up-z-a' : 'fa sort-icon fa-arrow-down-a-z'}" data-bs-toggle="tooltip" data-bs-placement="top" title="sort-by-title"></i>
+            </a>
+
+        </th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}" th:attr="data-id=${task.id}">
+    <td>
+            <img th:if="${task.status}" data-toggle="tooltip" data-placement="top" title="Done!" src="img/task-done-pro-sm.png"/>
+            <img th:unless="${task.status}" data-toggle="tooltip" data-placement="top" title="Not done!" src="img/task-notdone-pro-sm.png"/>
+        </td>
+        <td th:text="${task.name}"></td>
+        <td th:text="${task.description}"></td>
+        <td>
+            <a th:unless="${task.status}" th:if="${task.id != null}" th:href="@{/showUpdateTaskPage(taskId=${task.id})}" data-bs-target="#exampleModal" data-bs-toggle="modal">
+                <img class="update-button" data-toggle="tooltip" data-placement="top" title="Change" src="img/update-pro-sm.png"/>
+            </a>
+            <a th:unless="${task.status}" th:href="@{/deleteTask(taskId=${task.id})}">
+                <img style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top" title="Delete" src="img/bin-md.png"/>
+            </a>
+            <a th:unless="${task.status}" th:href="@{/setStateToDoneAction(taskId=${task.id})}">
+                <img data-toggle="tooltip" data-placement="top" title="Mark as done" src="img/done-pro-sm.png"/>
+            </a>
+            <a th:if="${task.status}" th:href="@{/setStateToNotDoneAction(taskId=${task.id})}">
+                <img data-toggle="tooltip" data-placement="top" title="Restore" src="img/restore-task-pro-sm.png"/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+    <script>
+        let updateButtons = document.querySelectorAll(".update-button");
+        updateButtons.forEach(function(button) {
+        button.addEventListener("click", function () {
+            let title = document.getElementById("title");
+            let description = document.getElementById("description");
+            let status = document.getElementById("status");
+            let row = button.parentElement.parentElement.parentElement;
+            let taskId = row.getAttribute('data-id');
+            title.value = row.cells[1].innerText;
+            description.value = row.cells[2].innerText;
+            status.value = 'false';
+            let modalTitle = document.getElementById("exampleModalLabel");
+            modalTitle.innerText = "Update";
+            document.getElementById('replaceIt').setAttribute('action', '/showUpdateTaskPage?taskId=' + taskId); // Set the action with taskId
+        });
+    });
+
+
+</script>
+
