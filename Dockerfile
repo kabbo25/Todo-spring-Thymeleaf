@@ -1,11 +1,11 @@
 FROM maven:3.8.5-openjdk-17 as build
 COPY . .
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -Dmaven.compiler.target=17 -Dmaven.compiler.source=17
 
-FROM openjdk:17.0.1-jdk-slim
+FROM tomcat:latest
 
-COPY --from=build /target/todo-in-spring-0.0.1-SNAPSHOT.war todo-in-spring.war
+COPY --from=build /target/todo-in-spring-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/todo-in-spring.war
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-war", "todo-in-spring.war"]
+ENTRYPOINT ["catalina.bat", "run"]
